@@ -15,7 +15,7 @@ attributes and methods:
     self.inputs             # Application inputs. Should be in the form of
                             # {'input_str': 'pythonic_string' ...}
     self.parameters         # Other parameters. Should be in the form of
-                            # {'input_str': 'pythonic_string' ...}
+                            # {'parameter_str': 'pythonic_string' ...}
     self.empty_data         # Used to tell the program how the empty outputs
                             # look like. It should be of the form:
                             # {'input_str': [], ... 'output_str': [] ...}
