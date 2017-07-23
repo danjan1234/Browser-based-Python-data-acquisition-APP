@@ -82,3 +82,8 @@ $ flask run
 After running all three steps, your default web browser should automatically open two tabs for displaying the two applications. If you cannot see the UI, try to copy the URLs to a different web browser. The two URLs should be: http://localhost:5000/R_vs_H and http://localhost:5000/ErrRate_vs_Volt. A small reminder: whatever after http://localhost:5000/ is actually the provided application name. Since URL cannot have any whitespaces, a valid application name should not contain any whitespaces.
 
 For convenience, I have included a Windows version `batch.bat` file that runs all three steps. It shouldn't be too hard to create a Linux version. Again, pressing the stop button will terminate the Bokeh application. The Bokeh and Flask serve will keep on running.
+
+The application UI should look like the following:
+<div>
+  <img src="Flask+Bokeh App UI.jpg" style="max-width: 50%; border:0; box-shadow: none; padding-top:20px" alt="flask and bokeh">
+</div>
