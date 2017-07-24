@@ -18,7 +18,7 @@ The code-generated browser GUI looks like the following:
 </div>
 
 I'm trying to make the GUI generation process as standard and as simple as possible. The generated browser GUI may not be suitable for a beauty contest but should meet the purpose. To achieve this, the following philosophy is adopted: each acquisition program can be considered as a function of the outputs on the inputs at some controlled parameters. In one acquisition task, one fixes the control parameters, varies only the inputs and takes measurement of the outputs. Therefore, at minimum the GUI needs to have the following three components:
-1. One field for the inputs and the control parametes
+1. One field for the inputs and the control parameters
 1. A plot that shows the dependence of the outputs on the inputs
 1. A text field that display application status and messages, e.g., error messages
 
@@ -41,8 +41,8 @@ self.intro_text         # Static HTML text to be displayed. Used for
 def config(self):       # Things to do during program initialization.
                         # Note this method runs only once after the
                         # program starts
-def acquire(self):      # Acqusition body
-def save(self):         # Things to do when acqusition stops, e.g.,
+def acquire(self):      # Acquisition body
+def save(self):         # Things to do when acquisition stops, e.g.,
                         # saving data
 def exit(self):         # Things to do when exiting the application
 def create_figs(self):  # Method to create Bokeh figures
@@ -56,13 +56,13 @@ In addition, the following AcquisitionAPP class variables and methods are worth 
 1. The five methods `config`, `acquire`, `create_figs`, `save`, `exit` will be called at different states of the application state machine
 
     1. `config` is called during the Initialization state and will be executed only once when the program starts. It is ideal for instrument configuration
-    1. `acquire` and `create_figs` will be called during the Run state. The Run state runs indefinitely until `self.__stop_request__` is set to True. The `acquire` function is the fundamental of the data acquisition. If you have a Python acquisition script, then most part of the script will be placed in this method. In general, there are two modes of acquiring data. The first is to upload the inputs to the instrument in one piece and wait for the response to arrive at once. In this mode, the plots will not be updated untill all data become avaiable. The second mode is to stream the inputs to the instrument and stream the outputs back to the program. In this mode, the plots are updated whenever new data become available. 
-    1. `save` will be called during the Stop state, which proceeds right after the Run state when a stop request is processed. Use it for stopping the instrument and saving the acquired data. Note, `acquire`, `create_figs` and `save` will all access the application outputs `self.outputs`. You do not need to define this parameter manually -- it is automatically created using `self.empty_data`
+    1. `acquire` and `create_figs` will be called during `Run` state. This state runs indefinitely until `self.__stop_request__` is set to True. The `acquire` function is the fundamental of the data acquisition. If you have a Python acquisition script, then most part of the script will be placed in this method. In general, there are two modes of acquiring data. The first is to upload the inputs to the instrument in one piece and wait for the response to arrive at once. In this mode, the plots will not be updated until all data become available. The second mode is to stream the inputs to the instrument and stream the outputs back to the program. In this mode, the plots are updated whenever new data become available. 
+    1. `save` will be called during the Stop state, which proceeds right after `Run` state when a stop request is processed. Use it for stopping the instrument and saving the acquired data. Note, `acquire`, `create_figs` and `save` will all access the application outputs `self.outputs`. You do not need to define this parameter manually -- it is automatically created using `self.empty_data`
     1. `exit` will be called during the Exit state. After this state, the application program will be terminated. However, the assistant Bokeh and Flask servers will keep on running (see following). Use this function for shutting down / resting instrument
 
 Lastly, to assist application development, the following UI events related variables can be used flexible control of the application:
 ```python
-self.__run_request__    # Request to start the acqusition. Equivalent to
+self.__run_request__    # Request to start the acquisition. Equivalent to
                         # pressing the Run button
 self.__just_started__   # Set True right after the acquisition starts. It's
                         # useful when some specific operations are needed
@@ -74,7 +74,7 @@ self.__stop_request__   # Request to stop the application
 self.__exit_request__   # Request to exit the application
 ```
 
-I strongly advise you check the example `example_apps.py`, which includes two demo acquisition programs. These two demos corrspond to the two acqusition modes. Note how `acquire` method is defined differently in the two programs.
+I strongly advise you check the example `example_apps.py`, which includes two demo acquisition programs. These two demos correspond to the two acquisition modes discussed above. Note how `acquire` method is defined differently in the two programs.
 
 ### Run the application
 Take running `example_app.py` as an example:
@@ -93,14 +93,14 @@ $ export FLASK_APP=app.py
 $ flask run
 ```
 
-Your default web browser should automatically open seperate tabs for displaying the two applications. If you cannot see the interface, try to copy the URLs to a different web browser. The two URLs should be: http://localhost:5000/R_vs_H and http://localhost:5000/ErrRate_vs_Volt. Whatever appears after http://localhost:5000/ is the application name. Since it's used to generate the application URL, a valid application name should not contain any whitespaces.
+Your default web browser should automatically open separate tabs for displaying the two applications. If you cannot see the interface, try to copy the URLs to a different web browser. The two URLs should be: http://localhost:5000/R_vs_H and http://localhost:5000/ErrRate_vs_Volt. Whatever appears after http://localhost:5000/ is the application name. Since it's used to generate the application URL, a valid application name should not contain any whitespaces.
 
-For convenience, I include a batch file `batch.bat` file that is programed to run the three steps in Windows. It shouldn't be too hard to create a Linux version. Pressing the `Exit` button will terminate the Bokeh application. However, both Bokeh and Flask serves will keep on running.
+For convenience, I include a batch file `batch.bat` file that is programed to run the three steps in Windows. It shouldn't be too hard to create a Linux version. Pressing the `Exit` button only terminates the Bokeh application. Both Bokeh and Flask serves will keep on running.
 
 ## Further reading
 This section discusses about some of the fundamentals of this project.
 
-The application class (AcquisitionAPP) comprises of two parts: one UI class (AcquisitionAPPUI from `acquisition_app_UI.py`) responsible for creating the browser interface and managing UI events; one class (AcquisitionAPPStateMachine from `acquisition_app_statemachine.py`) for taking care of requests such as instrument configuration, acquisition, data saving, etc. Each application instance has a UI instance and a state machine instance run in seperate threads. UI instance and state machine instance share data via variables in the application class instance.
+The application class (AcquisitionAPP) comprises of two parts: one UI class (AcquisitionAPPUI from `acquisition_app_UI.py`) responsible for creating the browser interface and managing UI events; one class (AcquisitionAPPStateMachine from `acquisition_app_statemachine.py`) for taking care of requests such as instrument configuration, acquisition, data saving, etc. Each application instance has a UI instance and a state machine instance run in separate threads. UI instance and state machine instance share data via variables in the application class instance.
 
 The state machine class has five states:
 ```python
@@ -111,9 +111,9 @@ Run:                Take measurement. This state runs indefinitely until a
                     __stop_request__ is issued
 Stop:               The target state after a __stop_request__ is issued. Good
                     for saving data
-Exit:               Reset the instrument, close any open sessoins, and exit the
-                    proglem safely
+Exit:               Reset the instrument, close any open sessions, and exit the
+                    program safely
 ```
-The state machine first enters with Initialization state. Whatever code in Initialization will only be executed once. The state machine then moves to the Idle state and waits for user inputs. Depending on the button pressed or UI events variable set, the next state will be Run, Stop, or Exit. If it's the Run state, it will try to run indefinitely until a `__stop_request__` is issued. The five application class methods `config`, `acquire`, `create_figs`, `save`, `exit` are invoked in different states. For example, `config` is called in the Initialization state, `save` is called in the Stop state, etc.
+The state machine first enters `Initialization` state. The code in `Initialization` will only be executed once. The state machine then moves to `Idle` state and waits for user inputs. Depending on the button pressed or UI event variables set, the next state can be `Run`, `Stop`, or `Exit`. In case of `Run` state, it will try to run indefinitely until a `__stop_request__` is issued. The five application class methods `config`, `acquire`, `create_figs`, `save`, `exit` are invoked in different states. For example, `config` is called in `Initialization` state, `save` is called in `Stop` state, etc.
 
 This project makes heavy use of Bokeh interactive plotting module. The Bokeh server can be deployed in two manners: [running Bokeh APPs directly on a Bokeh server or using bokeh.client](http://bokeh.pydata.org/en/latest/docs/user_guide/server.html). This project adopts the latter approach. The advantage is when multiple browsers open the same URL, they will all share the exact same application state. This is very important for a data acquisition program. Furthermore, if multiple applications are running simultaneously, a Flask app is created for easy routing between the applications.
