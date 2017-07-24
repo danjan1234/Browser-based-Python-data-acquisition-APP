@@ -22,6 +22,13 @@ I'm trying to make the GUI generation process as standard and as simple as possi
 1. A plot that shows the dependence of the outputs on the inputs
 1. A text field that display application status and system messages, e.g., error messages
 
+## Requirement
+Note this project is for Python 3 only. The following Python modules are required:
+1. Bokeh
+1. Flask
+1. Numpy
+1. Pandas
+
 ## How to use
 ### Create your own application class
 In order to create browser-based acquisition program, one only needs to work on the application class (AcquisitionAPP from `acquisition_app.py`). Note the included version is a full-fledged demo application. In order to create your own applications, inherit this class and override the following attributes and methods:
