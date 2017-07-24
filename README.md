@@ -1,4 +1,4 @@
-# Browser-based Python data acquisition using Bokeh and Flask (Python 3)
+# Browser-based data acquisition via Python, Bokeh, Flask, and State Machine (Python 3)
 
 ## Introduction
 This project offers a simple way of creating browser-based data acquisition programs in Python.
