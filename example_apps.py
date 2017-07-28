@@ -50,7 +50,13 @@ class RvsH(AcquisitionAPP):
     def save(self):
         print("Saving data")
         tmp = self.outputs.to_df()
-        tmp.to_csv(self.parameters['Save path'])
+        try:
+            tmp.to_csv(self.parameters['Save path'])
+        except:
+            error_message = "File cannot be saved!"
+            # Append message
+            self.__message__ += "<p><font color='red'>Error: {}</font><p>".format(
+                            error_message)
 
     def exit(self):
         print("Exiting program")
@@ -144,7 +150,13 @@ class ErrRatevsVolt(AcquisitionAPP):
     def save(self):
         print("Saving data")
         tmp = self.outputs.to_df()
-        tmp.to_csv(self.parameters['Save path'])
+        try:
+            tmp.to_csv(self.parameters['Save path'])
+        except:
+            error_message = "File cannot be saved!"
+            # Append message
+            self.__message__ += "<p><font color='red'>Error: {}</font><p>".format(
+                            error_message)
 
     def exit(self):
         print("Exiting program")
