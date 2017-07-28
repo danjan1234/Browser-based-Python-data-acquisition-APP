@@ -12,8 +12,8 @@ Run:                Take measurement. This state runs indefinitely until a
                     __stop_request__ is issued
 Stop:               The target state after a __stop_request__ is issued. Good
                     for saving data
-Exit:               Reset the instrument, close any open sessoins, and exit the
-                    proglem safely
+Exit:               Reset the instrument, close any open sessions, and exit the
+                    program safely
 """
 
 
@@ -157,10 +157,10 @@ class AcquisitionAPPStateMachine(StateMachine):
     def __acquire__(inst_app):
         new_data = inst_app.acquire()
         if new_data is None:
-            inst_app.__stop_request__ = True    # Escpate Run state
+            inst_app.__stop_request__ = True    # Escape Run state
             return
         if type(new_data) is not dict:
-            # Append message varible from the appliation instance
+            # Append message variable from the application instance
             inst_app.__message__ += "<p><font color='red'>Error: {}</font><p>".format(
                             "acquire() needs to return a dictionary ")
             inst_app.__stop_request__ = True    # Escpate Run state
