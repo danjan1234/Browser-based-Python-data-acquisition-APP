@@ -7,7 +7,13 @@ Recently data acquisition using Python has gained significant popularity in the 
 
 The advantages of adopting a web browser interface are two folds:
 1. There are many Python modules on web framework available, hence, developing a web browser based application is relatively easy. In this work, Bokeh and Flask are implemented
-1. The deployment of a web browser based application is not limited to local machines. One can push it in the serve and run it remotely, which can be handy in a certain circumstances 
+1. The deployment of a web browser based application is not limited to local machines. One can push it in the serve and run it remotely, which can be handy in a certain circumstances
+
+**Note: there is incompatibility issue with tornado 4.5. If you are running tornado 4.5, please degrade it to version 4.4 by running:**
+```sh
+pip uninstall tornado
+pip install tornado==4.4.2
+```
 
 ## Basic idea
 The main goal of this project is to offer a browser GUI interface. This article assumes you already know in advance how to write a Python script for data acquisition. Tools such as [PyDAQmx](https://pythonhosted.org/PyDAQmx/) and [PyVISA](https://pyvisa.readthedocs.io/en/stable/) are not included. Once you are familiar with writing Python acquisition scripts, this article will assist you converting them to a browser based applications.
