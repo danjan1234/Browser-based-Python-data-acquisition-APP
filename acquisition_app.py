@@ -3,7 +3,7 @@
 
 
 """
-This module defines an appliation class named AcquisitionAPP for data
+This module defines an application class named AcquisitionAPP for data
 acquisition.
 
 Note this class is a full-fledged demo application. In order to create a custom 
@@ -25,8 +25,8 @@ attributes and methods:
     def config(self):       # Things to do during program initialization.
                             # Note this method runs only once after the
                             # program starts
-    def acquire(self):      # Acqusition body
-    def save(self):         # Things to do when acqusition stops, e.g.,
+    def acquire(self):      # Acquisition body
+    def save(self):         # Things to do when acquisition stops, e.g.,
                             # saving data
     def exit(self):         # Things to do when exiting the application
     def create_figs(self):  # Method to create Bokeh figures
@@ -34,7 +34,7 @@ attributes and methods:
 In addition, to assist application development, the following UI events
 related parameters can be used with flexibility:
 
-    self.__run_request__    # Request to start the acqusition. Equivalent to
+    self.__run_request__    # Request to start the acquisition. Equivalent to
                             # pressing the Run button
     self.__just_started__   # Set True right after the acquisition starts. It's
                             # useful when some specific operations are needed
@@ -62,10 +62,10 @@ class AcquisitionAPP(object):
     """
     Create a simple browser-based data acquisition application.
 
-    This application replies on Bokeh for interactive data plottig.
+    This application replies on Bokeh for interactive data plotting.
 
     This application comprises of two modules: the state machine module is
-    reponsible for run/pause/stop/exit UI events; the UI module is responsible
+    responsible for run/pause/stop/exit UI events; the UI module is responsible
     for creating the browser interface and data plotting. The module run in
     their own thread and share the data via a few global variables.
 
@@ -85,7 +85,7 @@ class AcquisitionAPP(object):
         of type list (np.array). The parameters are the static controls and do
         not change during each single acquisition process.  Both inputs and
         parameters are dictionary type. To take advantage of Python, the values
-        of both dictionaries are pythsonic strings.
+        of both dictionaries are pythonic strings.
 
         outputs and empty_data define the application outcomes. The keys of
         empty_data should be consistent with inputs and outputs. outputs must
@@ -97,7 +97,7 @@ class AcquisitionAPP(object):
                                 ", thus no whitespace is allowed")
         self.app_name = app_name
 
-        # Key parameters for defining the acquasition
+        # Key parameters for defining the acquisition
         self.inputs = { 'x1': 'np.linspace(0,1,100)',
                         'x2': 'np.linspace(0,1,100)'}
         self.parameters = { 'S1': '12.3', 'S2': "'haha'", 'S3':'[1,2]',
@@ -110,7 +110,7 @@ class AcquisitionAPP(object):
         # Introduction text above the plots
         self.intro_text = "<font size='5'><b>{}</b></font>".format(app_name)
 
-        # Cosmetics for the contrl panel
+        # Cosmetics for the control panel
         self.ctrl_panel_ncols = 1       # Number of columns
 
         # State control and status bar related variables
@@ -141,7 +141,7 @@ class AcquisitionAPP(object):
         Note: at the very beginning (self.__just_started__ == True), one may
         need to initialize the inputs.
 
-        Note: set "self.__stop_request__ = True" at the end of the acqusition.
+        Note: set "self.__stop_request__ = True" at the end of the acquisition.
         This tells the state machine to jump out of the Run state.
 
         For simple-step acquisition, set the __stop_request__ flag at the end of
@@ -214,8 +214,8 @@ class AcquisitionAPP(object):
 
     def create_figs(self):
         """
-        Create bokeh figures. There shouldn't be problem using any types of
-        bokeh plots. Just remember to import the required modules at the
+        Create Bokeh figures. There shouldn't be problem using any types of
+        Bokeh plots. Just remember to import the required modules at the
         beginning.
         """
         from bokeh.models.widgets import Panel, Tabs
@@ -241,10 +241,10 @@ class AcquisitionAPP(object):
 
     def __exec__(self, string):
         """
-        Try to execuate the pythonic string command and produce a message in
+        Try to execute the pythonic string command and produce a message in
         case of errors.
 
-        Return None if a error is detected.
+        Return None if an error is detected.
         """
         rlt = None
         try:
@@ -254,7 +254,7 @@ class AcquisitionAPP(object):
             exec("rlt = " + string, globals(), ldict)
             rlt = ldict['rlt']
         except:
-            error_message = "Pythonic string '{}' cannot be execuated.".format(
+            error_message = "Pythonic string '{}' cannot be executed.".format(
                             string)
             # Append message
             self.__message__ += "<p><font color='red'>Error: {}</font><p>".format(
