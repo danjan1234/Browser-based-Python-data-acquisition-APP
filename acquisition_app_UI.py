@@ -125,7 +125,7 @@ class AcquisitionAPPUI(object):
         self.create_state_ctrls()
         self.create_status_bar()
 
-        # Create figs using applicatio class function
+        # Create figs using application class function
         figs = self.inst_app.create_figs()
 
         UI = layout([
