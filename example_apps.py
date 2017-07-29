@@ -131,7 +131,7 @@ class ErrRatevsVolt(AcquisitionAPP):
         data = {'Volt (V)': voltage_single, 'Error rate': errrate1_single,
                 '1 - Error rate': errrate2_single, 'Pulse width (ns)': pw_single,
                 'Applied field': 1 if self.parameters['Applied field'] == 'True' else 0,
-                'color': self.pw_idx}
+                'color': self.color_list[self.pw_idx]}
 
         # Increase the indices for the next acqusition cycle
         if self.pw_idx == self.n_pw - 1 and self.voltage_idx == self.n_voltage - 1:

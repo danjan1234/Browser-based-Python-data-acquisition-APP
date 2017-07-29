@@ -171,7 +171,8 @@ class AcquisitionAPPStateMachine(StateMachine):
                 new_key = str(key)
                 new_data[new_key] = new_data[key]
                 del new_data[key]
-            if not hasattr(value, '__iter__'):
+            # Put value in a list if it's a single number or string
+            if not hasattr(value, '__iter__') or type(value) is str:
                 new_data[key] = [value]
         inst_app.__doc__.add_next_tick_callback(partial(
                                     AcquisitionAPPStateMachine.__update__,
