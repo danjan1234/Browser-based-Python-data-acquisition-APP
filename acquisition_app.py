@@ -157,8 +157,8 @@ class AcquisitionAPP(object):
         # The following code is good for single-step acquisition
         """
         time.sleep(2)
-        x1 = self.__exec__(self.inputs['x1'])
-        x2 = self.__exec__(self.inputs['x2'])
+        x1 = self.parse(self.inputs['x1'])
+        x2 = self.parse(self.inputs['x2'])
         if x1 is None or self.x2 is None:
             return
 
@@ -173,8 +173,8 @@ class AcquisitionAPP(object):
         if self.__just_started__:
             # Things to do at the first Run state, such as initializing the
             # inputs
-            self.x1 = self.__exec__(self.inputs['x1'])
-            self.x2 = self.__exec__(self.inputs['x2'])
+            self.x1 = self.parse(self.inputs['x1'])
+            self.x2 = self.parse(self.inputs['x2'])
             if self.x1 is None or self.x2 is None:
                 return
             self.count = 0
@@ -239,7 +239,7 @@ class AcquisitionAPP(object):
         tabs = Tabs(tabs=[tab1, tab2])
         return tabs
 
-    def __exec__(self, string):
+    def parse(self, string):
         """
         Try to execute the pythonic string command and produce a message in
         case of errors.

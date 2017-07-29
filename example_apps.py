@@ -35,7 +35,7 @@ class RvsH(AcquisitionAPP):
 
     def acquire(self):
         # Single aquisition
-        field = self.__exec__(self.inputs['Field (Oe)'])
+        field = self.parse(self.inputs['Field (Oe)'])
         if field is None:
             return
 
@@ -105,8 +105,8 @@ class ErrRatevsVolt(AcquisitionAPP):
         if self.__just_started__:
             # Things to do at the very first acquisition cycle, such as
             # initializing inputs, etc.
-            self.pw = self.__exec__(self.parameters['Pulse width (ns)'])
-            self.voltage = self.__exec__(self.inputs['Volt (V)'])
+            self.pw = self.parse(self.parameters['Pulse width (ns)'])
+            self.voltage = self.parse(self.inputs['Volt (V)'])
             if self.voltage is None or self.pw is None:
                 return
             self.pw_idx = 0
