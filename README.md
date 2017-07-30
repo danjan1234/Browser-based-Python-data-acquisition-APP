@@ -20,7 +20,7 @@ The main goal of this project is to offer a browser GUI interface. This article 
 
 Let's first take a look at the code-generated browser GUI:
 <div>
-  <img src="Flask+Bokeh App UI.jpg" style="max-width: 50%; border:20 box-shadow: none; padding-top:20px" alt="Browser-based Python data acquisition APP UI">
+  <img src="Flask+Bokeh App UI.png" style="max-width: 50%; border:20 box-shadow: none; padding-top:20px" alt="Browser-based Python data acquisition APP UI">
 </div>
 
 I'm trying to make the GUI generation process as standard and as simple as possible. The generated browser GUI may not be suitable for a beauty contest but should meet the purpose. To achieve this, the following philosophy is adopted: each acquisition program can be considered as a function of the output responses on the inputs under controlled circumstances (let's call them parameters). In one acquisition task, one fixes the control parameters, varies only the inputs and takes measurement of the outputs. Therefore, at minimum the GUI needs to have the following three components:
