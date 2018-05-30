@@ -9,10 +9,12 @@ The advantages of adopting a web browser interface are two folds:
 1. There are many Python modules on web framework available, hence, developing a web browser based application is relatively easy. In this work, Bokeh and Flask are implemented
 1. The deployment of a web browser based application is not limited to local machines. One can push it in the serve and run it remotely, which can be handy in a certain circumstances
 
-**Note: there is incompatibility issue with tornado 4.5. If you are running tornado 4.5, please degrade it to version 4.4 by running:**
+**Note: there is incompatibility issue with tornado 4.5. If your system has tornado 4.5, please degrade it to version 4.4. Aslo note: newer versions of bokeh have adopted some substantially changes, this program only supports v0.12.6**
 ```sh
 pip uninstall tornado
 pip install tornado==4.4.2
+pip uninstall bokeh
+pip install bokeh==0.12.6
 ```
 
 ## Basic idea
